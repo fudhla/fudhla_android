@@ -64,7 +64,7 @@
                     android:layout_weight="1"
                     android:text="Luas Area"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="#2196F3" />
 
                 <Button
                     android:id="@+id/menuKubus"
@@ -75,7 +75,7 @@
                     android:background="@android:color/transparent"
                     android:text="Volume Ruang"
                     android:textAllCaps="false"
-                    android:textColor="#666666" />
+                    android:textColor="#03A9F4" />
             </LinearLayout>
 
             <LinearLayout
