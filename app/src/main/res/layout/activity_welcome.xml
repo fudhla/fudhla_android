@@ -12,8 +12,8 @@
     <View
         android:id="@+id/headerGradient"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="#6FB2E7"
+        android:layout_height="240dp"
+        android:background="@drawable/bg_header_wave"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -49,7 +49,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Desa Fudhla Jaya"
+                        android:text="Desa Fudhla"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -60,11 +60,11 @@
                     android:layout_height="48dp"
                     android:layout_alignParentEnd="true"
                     android:padding="2dp"
-                    android:src="@drawable/scren"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/foto_profile"
                     app:strokeColor="#FFFFFF"
                     app:strokeWidth="2dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.SmallComponent"
-                    />
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.SmallComponent" />
             </RelativeLayout>
 
             <androidx.cardview.widget.CardView
@@ -102,9 +102,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="54dp"
                         android:layout_marginTop="24dp"
-                        android:background="#F1F5F9"
+                        android:background="@drawable/bg_rounded_container"
                         android:gravity="center_vertical"
                         android:paddingHorizontal="16dp">
+
                         <ImageView
                             android:layout_width="22dp"
                             android:layout_height="22dp"
@@ -124,61 +125,162 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Peminjaman Fasilitas"
+                android:text="Kategori Fasilitas"
                 android:textColor="#1E293B"
                 android:textSize="20sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold" />
+
+            <androidx.gridlayout.widget.GridLayout
+                android:id="@+id/menuGridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="4dp"
+                app:columnCount="3"
+                app:useDefaultMargins="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFasilitasBalai"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:text="🏛️\nBalai Desa"
+                    android:textSize="11sp"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    app:strokeColor="#E2E8F0"
+                    app:cornerRadius="16dp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFasilitasSport"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:text="⚽\nLapangan"
+                    android:textSize="11sp"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    app:strokeColor="#E2E8F0"
+                    app:cornerRadius="16dp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFasilitasMobil"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:text="🚗\nMobil Siaga"
+                    android:textSize="11sp"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    app:strokeColor="#E2E8F0"
+                    app:cornerRadius="16dp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFasilitasTenda"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:text="⛺\nTenda RT"
+                    android:textSize="11sp"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    app:strokeColor="#E2E8F0"
+                    app:cornerRadius="16dp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFasilitasAudio"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:text="🔊\nSound"
+                    android:textSize="11sp"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    app:strokeColor="#E2E8F0"
+                    app:cornerRadius="16dp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFasilitasTani"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="105dp"
+                    android:text="🚜\nAlat Tani"
+                    android:textSize="11sp"
+                    android:textColor="#1E293B"
+                    android:gravity="center"
+                    app:strokeColor="#E2E8F0"
+                    app:cornerRadius="16dp"
+                    app:layout_columnWeight="1"
+                    app:layout_gravity="fill_horizontal" />
+
+            </androidx.gridlayout.widget.GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Filter Cepat"
+                android:textColor="#1E293B"
+                android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:scrollbars="none">
-                <LinearLayout
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
 
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSemua"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:text="Semua"
-                        android:textAllCaps="false"
-                        app:cornerRadius="12dp"
-                        android:layout_marginEnd="10dp"
-                        app:backgroundTint="#03A9F4"/>
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_marginEnd="8dp"
+                        android:text="🌟 Semua" />
 
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipGedung"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:text="🏛️ Gedung"
-                        android:textColor="#64748B"
-                        android:textAllCaps="false"
-                        android:layout_marginEnd="10dp"
-                        android:backgroundTint="#EDF2F7"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="🏛️ Gedung" />
 
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipLapangan"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:text="⚽ Lapangan"
-                        android:textColor="#64748B"
-                        android:textAllCaps="false"
-                        android:layout_marginEnd="10dp"
-                        android:backgroundTint="#EDF2F7"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="⚽ Lapangan" />
 
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipKendaraan"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:text="🚗 Kendaraan"
-                        android:textColor="#64748B"
-                        android:textAllCaps="false"
-                        android:backgroundTint="#EDF2F7"/>
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:text="🚗 Kendaraan" />
+                </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
             <androidx.cardview.widget.CardView
@@ -197,12 +299,14 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="190dp">
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="#E2E8F0"
                             android:scaleType="centerCrop"
-                            android:src="@android:drawable/ic_dialog_map"
-                            android:background="#E2E8F0" />
+                            android:src="@drawable/balai_desa" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -253,8 +357,7 @@
                             android:textAllCaps="false"
                             android:textStyle="bold"
                             app:cornerRadius="16dp"
-                            app:backgroundTint="#03A9F4"
-                            />
+                            app:backgroundTint="#03A9F4" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

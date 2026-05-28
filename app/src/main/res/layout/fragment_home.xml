@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginBottom="12dp"
-                        android:text="Detail Aset Publik"
+                        android:text="Peminjaman Fasilitas"
                         android:textAllCaps="false"
                         app:backgroundTint="#03A9F4"
                         app:cornerRadius="12dp" />

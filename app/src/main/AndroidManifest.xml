@@ -26,25 +26,23 @@
         </activity>
 
         <activity
+            android:name=".activity_formulir_pinjam"
+            android:exported="false" />
+
+        <activity
             android:name=".pertemuan_6.WebViewActivity"
             android:exported="false" />
 
         <activity
             android:name=".pertemuan_4.DashboardActivity"
             android:exported="false" />
-
         <activity
             android:name=".pertemuan_4.Custom2Activity"
             android:exported="false" />
 
         <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".pertemuan_3.LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".pertemuan_3.WelcomeActivity"
             android:exported="false" />
@@ -53,6 +51,9 @@
             android:name=".pertemuan_2.HitungActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

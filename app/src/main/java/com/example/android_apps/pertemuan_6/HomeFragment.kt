@@ -18,13 +18,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Inisialisasi Tombol
+        // 1. Inisialisasi Tombol Utama Dashboard
         val btn1 = view.findViewById<MaterialButton>(R.id.btn1)
         val btn2 = view.findViewById<MaterialButton>(R.id.btn2)
         val btn3 = view.findViewById<MaterialButton>(R.id.btn3)
         val btnWelcome = view.findViewById<MaterialButton>(R.id.btnWelcome)
 
-        // 2. Logika Navigasi (Intent)
+        // 2. Logika Navigasi (Intent) Menuju Masing-Masing Halaman
 
         // Pindah ke HitungActivity (Pertemuan 2)
         btn1.setOnClickListener {
@@ -41,10 +41,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             startActivity(Intent(requireContext(), WebViewActivity::class.java))
         }
 
-        // Pindah ke WelcomeActivity dengan membawa data
+        // Pindah ke WelcomeActivity dengan membawa data Nama
         btnWelcome.setOnClickListener {
             val intent = Intent(requireContext(), WelcomeActivity::class.java).apply {
-                putExtra("USERNAME", "Nabila") // Data statis untuk sementara
+                putExtra("USERNAME", "Fudhla")
             }
             startActivity(intent)
         }

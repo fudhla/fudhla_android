@@ -9,16 +9,17 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.android_apps.R
 import com.example.android_apps.pertemuan_3.LoginActivity
+import com.example.android_apps.pertemuan_3.FragmentMore
 import com.example.android_apps.pertemuan_6.AboutFragment
 import com.example.android_apps.pertemuan_6.HomeFragment
 import com.example.android_apps.pertemuan_6.ProfileFragment
-import com.example.android_apps.pertemuan_6.SessionManager // Tambahkan import ini
+import com.example.android_apps.pertemuan_6.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 
 class DashboardActivity : AppCompatActivity() {
 
-    // Tambahkan variabel global untuk session
+    // Variabel global untuk session
     private lateinit var session: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,22 +34,25 @@ class DashboardActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Bina Desa - Dashboard"
 
-        // 2. Default Fragment
+        // 2. Default Fragment saat pertama kali dibuka
         if (savedInstanceState == null) {
             replaceFragment(HomeFragment())
         }
 
-        // 3. Bottom Navigation
+        // 3. Bottom Navigation dengan 3 Menu Utama (Home, Riwayat, Profile)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> replaceFragment(HomeFragment())
-                R.id.nav_about -> replaceFragment(AboutFragment())
+
+                // Mengarahkan menu Riwayat ke FragmentMore (ListView) sesuai materi baru
+                R.id.menu_more -> replaceFragment(FragmentMore())
+
                 R.id.nav_profile -> replaceFragment(ProfileFragment())
                 else -> false
             }
         }
-    }
+    } // <- Kurung kurawal tutup onCreate
 
     private fun replaceFragment(fragment: Fragment): Boolean {
         supportFragmentManager.beginTransaction()
@@ -63,7 +67,6 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     fun performLogout() {
-        // Gunakan session manager untuk clear data agar lebih aman
         session.saveLoginStatus(false, "")
 
         val sharedPref = getSharedPreferences("BinaDesaPrefs", Context.MODE_PRIVATE)
@@ -95,4 +98,4 @@ class DashboardActivity : AppCompatActivity() {
             }
             .show()
     }
-}
+} // <- Kurung kurawal tutup akhir Class DashboardActivity
