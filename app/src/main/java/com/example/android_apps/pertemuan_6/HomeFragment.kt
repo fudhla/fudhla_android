@@ -8,6 +8,7 @@ import com.example.android_apps.R
 import com.example.android_apps.pertemuan_2.HitungActivity
 import com.example.android_apps.pertemuan_3.WelcomeActivity
 import com.example.android_apps.pertemuan_4.Custom2Activity
+import com.example.android_apps.pertemuan_6.pertemuan_10.TenthActivity // Import Activity baru Anda
 import com.google.android.material.button.MaterialButton
 
 /**
@@ -23,6 +24,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val btn2 = view.findViewById<MaterialButton>(R.id.btn2)
         val btn3 = view.findViewById<MaterialButton>(R.id.btn3)
         val btnWelcome = view.findViewById<MaterialButton>(R.id.btnWelcome)
+
+        // Tambahkan inisialisasi tombol Pertemuan 10 di sini
+        val btnPertemuan10 = view.findViewById<MaterialButton>(R.id.btnPertemuan10)
 
         // 2. Logika Navigasi (Intent) Menuju Masing-Masing Halaman
 
@@ -47,6 +51,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 putExtra("USERNAME", "Fudhla")
             }
             startActivity(intent)
+        }
+
+        // Pindah ke TenthActivity (Pertemuan 10 - TabLayout)
+        btnPertemuan10.setOnClickListener {
+            startActivity(Intent(requireContext(), TenthActivity::class.java))
         }
     }
 

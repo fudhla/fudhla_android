@@ -82,11 +82,20 @@
                         android:id="@+id/btn3"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:text="Buka Website Bina Desa"
+                        android:layout_marginBottom="12dp" android:text="Buka Website Bina Desa"
                         android:textAllCaps="false"
                         android:textColor="#FFFFFF"
                         app:backgroundTint="#2196F3"
                         app:cornerRadius="12dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPertemuan10"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="TabLayoutRecyclerView"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        app:backgroundTint="#4CAF50" app:cornerRadius="12dp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
