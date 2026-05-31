@@ -95,7 +95,7 @@
                         android:text="TabLayoutRecyclerView"
                         android:textAllCaps="false"
                         android:textColor="#FFFFFF"
-                        app:backgroundTint="#4CAF50" app:cornerRadius="12dp" />
+                        app:backgroundTint="#03A9F4" app:cornerRadius="12dp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
