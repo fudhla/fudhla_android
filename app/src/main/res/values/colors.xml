@@ -2,4 +2,5 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-</resources>
+
+    <color name="bina_desa_blue">#00AEEF</color> <color name="bina_desa_blue_light">#E5F7FD</color> <color name="text_title_dark">#222222</color> <color name="text_desc_gray">#666666</color> </resources>

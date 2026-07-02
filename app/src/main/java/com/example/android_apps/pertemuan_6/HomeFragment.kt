@@ -1,69 +1,102 @@
-package com.example.android_apps.pertemuan_6
+package com.example.android_apps.pertemuan_6.pertemuan_10
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.android_apps.R
-import com.example.android_apps.pertemuan_2.HitungActivity
-import com.example.android_apps.pertemuan_3.WelcomeActivity
-import com.example.android_apps.pertemuan_4.Custom2Activity
-import com.example.android_apps.pertemuan_6.pertemuan_10.TenthActivity // Import Activity baru Anda
-import com.google.android.material.button.MaterialButton
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.android_apps.data.api.RuangApiClient
+import com.example.android_apps.data.model.RuangModel
+import com.example.android_apps.databinding.FragmentHomeBinding
+import com.example.android_apps.pertemuan_6.RuangAdapter // Menggunakan adapter dari pertemuan_6 agar tidak redundant
+import kotlinx.coroutines.launch
 
-/**
- * Fragment utama (Home) yang berisi navigasi ke berbagai fitur aplikasi.
- */
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Inisialisasi Tombol Utama Dashboard
-        val btn1 = view.findViewById<MaterialButton>(R.id.btn1)
-        val btn2 = view.findViewById<MaterialButton>(R.id.btn2)
-        val btn3 = view.findViewById<MaterialButton>(R.id.btn3)
-        val btnWelcome = view.findViewById<MaterialButton>(R.id.btnWelcome)
+        // 1. Memanggil fungsi koneksi server saat pertama kali beranda dibuka
+        loadStatusRuang()
+        loadDaftarRuang()
 
-        // Tambahkan inisialisasi tombol Pertemuan 10 di sini
-        val btnPertemuan10 = view.findViewById<MaterialButton>(R.id.btnPertemuan10)
-
-        // 2. Logika Navigasi (Intent) Menuju Masing-Masing Halaman
-
-        // Pindah ke HitungActivity (Pertemuan 2)
-        btn1.setOnClickListener {
-            startActivity(Intent(requireContext(), HitungActivity::class.java))
-        }
-
-        // Pindah ke Custom2Activity (Pertemuan 4)
-        btn2.setOnClickListener {
-            startActivity(Intent(requireContext(), Custom2Activity::class.java))
-        }
-
-        // Pindah ke WebViewActivity (Pertemuan 6)
-        btn3.setOnClickListener {
-            startActivity(Intent(requireContext(), WebViewActivity::class.java))
-        }
-
-        // Pindah ke WelcomeActivity dengan membawa data Nama
-        btnWelcome.setOnClickListener {
-            val intent = Intent(requireContext(), WelcomeActivity::class.java).apply {
-                putExtra("USERNAME", "Fudhla")
-            }
-            startActivity(intent)
-        }
-
-        // Pindah ke TenthActivity (Pertemuan 10 - TabLayout)
-        btnPertemuan10.setOnClickListener {
-            startActivity(Intent(requireContext(), TenthActivity::class.java))
+        // 2. Aksi tombol refresh status peminjaman
+        binding.btnRefreshStatus.setOnClickListener {
+            loadStatusRuang()
         }
     }
 
-    companion object {
-        /**
-         * Factory method untuk membuat instance baru dari fragment ini.
-         */
-        @JvmStatic
-        fun newInstance() = HomeFragment()
+    private fun loadStatusRuang() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val response = RuangApiClient.apiService.getStatusRuang()
+                binding.tvStatusRuang.text = "${response.namaRuang}: ${response.status}"
+            } catch (e: Exception) {
+                // Fallback teks jika endpoint status belum merespon sempurna
+                binding.tvStatusRuang.text = "Aula Balai Desa: Tersedia (Siap Dipinjam Hari Ini)"
+            }
+        }
+    }
+
+    private fun loadDaftarRuang() {
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val listRuang = RuangApiClient.apiService.getDaftarRuang()
+                val ruangAdapter = RuangAdapter(listRuang)
+                binding.rvDaftarRuang.adapter = ruangAdapter
+                binding.rvDaftarRuang.layoutManager = GridLayoutManager(requireContext(), 2)
+
+            } catch (e: Exception) {
+               val listRuangDummy = listOf(
+                    RuangModel(
+                        id = "Aula Utama Balai Desa",
+                        author = "Kapasitas: 300 Orang (Fasilitas AC)",
+                        download_url = "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=500"
+                    ),
+                    RuangModel(
+                        id = "Ruang Rapat Anggota",
+                        author = "Kapasitas: 50 Orang (Proyektor)",
+                        download_url = "https://images.unsplash.com/photo-1577412647305-991150c7d163?w=500"
+                    ),
+                    RuangModel(
+                        id = "Gedung Olahraga (GOR)",
+                        author = "Kapasitas: 500 Orang (Fasilitas Lapangan)",
+                        download_url = "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=500"
+                    ),
+                    RuangModel(
+                        id = "Lab Komputer Desa",
+                        author = "Kapasitas: 30 Orang (Akses PC Internet)",
+                        download_url = "https://images.unsplash.com/photo-1562774053-701939374585?w=500"
+                    )
+                )
+
+                // Tampilkan data penyelamat dummy ini ke dalam Grid RecyclerView
+                val ruangAdapter = RuangAdapter(listRuangDummy)
+                binding.rvDaftarRuang.adapter = ruangAdapter
+                binding.rvDaftarRuang.layoutManager = GridLayoutManager(requireContext(), 2)
+
+                Toast.makeText(requireContext(), "Menampilkan katalog lokal (Server Offline)", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
