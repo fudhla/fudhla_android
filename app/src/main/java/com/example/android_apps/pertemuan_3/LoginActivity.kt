@@ -72,6 +72,14 @@ class LoginActivity : AppCompatActivity() {
 
         // Pindah ke halaman Dashboard
         val intent = Intent(this, DashboardActivity::class.java)
+
+        // 🎯 KUNCI PENYEMPURNAAN LANGKAH 3:
+        // Ambil data kiriman dari MainActivity (jika ada) lalu teruskan langsung ke DashboardActivity
+        val destination = getIntent()?.getStringExtra("OPEN_FRAGMENT")
+        if (destination != null) {
+            intent.putExtra("OPEN_FRAGMENT", destination)
+        }
+
         startActivity(intent)
         finish() // Menutup LoginActivity agar tidak bisa balik lagi tekan tombol back
     }

@@ -19,7 +19,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         // 1. Sinkronisasi nama: Memastikan teks yang muncul tetap "Fudhla"
         var username = intent.getStringExtra("USERNAME") ?: "Fudhla"
-        if (username == "Nabila" || username == "Warga") {
+        if (username == "Fudhla" || username == "Warga") {
             username = "Fudhla"
         }
         val tvWelcome = findViewById<TextView>(R.id.tvWelcome)

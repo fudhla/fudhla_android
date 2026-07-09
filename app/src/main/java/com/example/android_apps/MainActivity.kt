@@ -2,6 +2,7 @@ package com.example.android_apps
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast // ➕ TAMBAHAN IMPORT BARU
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,13 +31,40 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // ➕ TAMBAHAN BARU: Memeriksa apakah activity dibuka via klik notifikasi sebelum pindah halaman
+        handleNotificationIntent(intent)
+
         // 4. Navigasi Otomatis ke LoginActivity
         navigateToLogin()
     }
 
+    // ➕ TAMBAHAN BARU: Menangani event jika notifikasi diklik saat aplikasi sedang berjalan di background
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleNotificationIntent(intent)
+    }
+
+    // ➕ TAMBAHAN BARU: Fungsi pendeteksi data navigasi dari ReminderReceiver
+    private fun handleNotificationIntent(intent: Intent?) {
+        val destination = intent?.getStringExtra("OPEN_FRAGMENT")
+        if (destination == "RIWAYAT") {
+            // Memunculkan pesan indikator bahwa notifikasi berhasil merespon halaman yang relevan
+            Toast.makeText(this, "Membuka Riwayat Peminjaman Ruang Desa...", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+        val loginIntent = Intent(this, LoginActivity::class.java)
+
+        // 🎯 KUNCI PENYEMPURNAAN LANGKAH 2:
+        // Ambil data dari intent Notifikasi secara eksplisit dan masukkan ke dalam loginIntent
+        val destination = intent?.getStringExtra("OPEN_FRAGMENT")
+        if (destination != null) {
+            loginIntent.putExtra("OPEN_FRAGMENT", destination)
+        }
+
+        startActivity(loginIntent)
 
         // Selesaikan MainActivity
         finish()

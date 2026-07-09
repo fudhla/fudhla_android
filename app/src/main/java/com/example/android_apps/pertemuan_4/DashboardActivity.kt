@@ -11,7 +11,8 @@ import com.example.android_apps.R
 import com.example.android_apps.pertemuan_3.LoginActivity
 import com.example.android_apps.pertemuan_3.FragmentMore
 import com.example.android_apps.pertemuan_6.AboutFragment
-import com.example.android_apps.pertemuan_6.HomeFragment
+// 🔄 DIUBAH: Mengubah import ke alamat HomeFragment yang baru (Pertemuan 10) agar fitur reminder aktif
+import com.example.android_apps.pertemuan_6.pertemuan_10.HomeFragment
 import com.example.android_apps.pertemuan_6.ProfileFragment
 import com.example.android_apps.pertemuan_6.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,6 +22,8 @@ class DashboardActivity : AppCompatActivity() {
 
     // Variabel global untuk session
     private lateinit var session: SessionManager
+    // ➕ TAMBAHAN BARU: Referensi global bottomNav agar bisa diakses dari fungsi handleNotificationIntent
+    private lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         // 3. Bottom Navigation dengan 3 Menu Utama (Home, Riwayat, Profile)
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> replaceFragment(HomeFragment())
@@ -52,7 +55,28 @@ class DashboardActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        // ➕ TAMBAHAN BARU: Cek apakah halaman diakses via klik data pendingintent Notifikasi Pengingat
+        handleNotificationIntent(intent)
     } // <- Kurung kurawal tutup onCreate
+
+    // ➕ TAMBAHAN BARU: Menangkap intent baru jika activity sedang aktif di background
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleNotificationIntent(intent)
+    }
+
+    // ➕ TAMBAHAN BARU: Fungsi memindahkan halaman secara relevan ke Tab Riwayat (FragmentMore) saat notifikasi diklik
+    private fun handleNotificationIntent(intent: Intent?) {
+        val destination = intent?.getStringExtra("OPEN_FRAGMENT")
+        if (destination == "RIWAYAT") {
+            // Mengubah status pilihan item menu bottom nav secara visual ke menu_more
+            bottomNav.selectedItemId = R.id.menu_more
+            // Mengganti fragment kontainer utama menjadi FragmentMore (Halaman Riwayat)
+            replaceFragment(FragmentMore())
+        }
+    }
 
     private fun replaceFragment(fragment: Fragment): Boolean {
         supportFragmentManager.beginTransaction()
@@ -89,7 +113,7 @@ class DashboardActivity : AppCompatActivity() {
     fun showLogoutDialog() {
         AlertDialog.Builder(this)
             .setTitle("Konfirmasi Logout")
-            .setMessage("Yakin ingin keluar dari aplikasi?")
+            .setMessage("Yakin ingin keluar dari application?")
             .setPositiveButton("Ya") { _, _ ->
                 performLogout()
             }
